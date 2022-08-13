@@ -1,5 +1,27 @@
 <h2 class="mt-5">Liste des produits</h2>
 
+<form [formGroup]="seachForm">
+  <div class="row">
+    <div class="col-md-4">
+      <input
+        type="text"
+        class="form-control input-rounded"
+        placeholder="Search par Dénomination..."
+        formControlName="searchByDenom"
+        (keyup)="search()"
+      />
+    </div>
+    <div class="col-md-4">
+      <input
+        type="text"
+        class="form-control input-rounded"
+        placeholder="Search par Catégorie..."
+        formControlName="searchByCat"
+        (keyup)="search()"
+      />
+    </div>
+  </div>
+</form>
 <table class="table">
   <thead>
     <tr>
@@ -10,6 +32,7 @@
       <th scope="col">PU</th>
       <th scope="col">Supprimer</th>
       <th scope="col">Datail</th>
+      <th scope="col">Update</th>
     </tr>
   </thead>
   <tbody>
@@ -36,6 +59,14 @@
           >
             Détail
           </button>
+        </td>
+        <td>
+          <a
+            class="btn login-form__btn submit btn-sm"
+            style="background-color: #ffd21a"
+            routerLink="/{{ produit.idProduit }}"
+            >Update</a
+          >
         </td>
       </tr>
     </ng-container>

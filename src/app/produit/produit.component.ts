@@ -1,5 +1,6 @@
 import { compileInjectable } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ProduitService } from '../produit.service';
 
@@ -10,23 +11,27 @@ import { ProduitService } from '../produit.service';
 })
 export class ProduitComponent implements OnInit {
 
+  seachForm: FormGroup;
+  searchByCat: string = ''
+  searchByDenom: string = ''
   produits: any[] = []
   produitObserver = new Subscription()
   produitToShow: any = null
-  constructor(private produitService: ProduitService) { }
 
+  constructor(private produitService: ProduitService) {
+    this.seachForm = new FormGroup({
+      searchByCat: new FormControl(""),
+      searchByDenom: new FormControl("")
+    })
+  }
   ngOnInit(): void {
     this.getProduits()
   }
 
-
   getProduits() {
-    this.produitObserver = this.produitService.fetchAll().subscribe({
+    this.produitObserver = this.produitService.fetchAll(this.searchByDenom, this.searchByCat).subscribe({
       next: (data: any) => {
         this.produits = data.items
-        console.log('====================================');
-        console.log("data", data);
-        console.log('====================================');
       },
 
       error: (err) => {
@@ -37,9 +42,6 @@ export class ProduitComponent implements OnInit {
 
 
   onDisplay(produit: any) {
-    console.log('====================================');
-    console.log("produit", produit);
-    console.log('====================================');
     this.produitToShow = produit
   }
 
@@ -55,6 +57,15 @@ export class ProduitComponent implements OnInit {
       })
     }
 
+  }
+
+
+  search() {
+    this.searchByCat = this.seachForm.value.searchByCat
+    this.searchByDenom = this.seachForm.value.searchByDenom
+    console.log("this.searchByCat", this.searchByCat);
+    console.log("this.searchByDenom", this.searchByDenom);
+    this.getProduits()
   }
 
 }

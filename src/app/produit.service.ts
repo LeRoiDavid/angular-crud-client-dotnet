@@ -12,7 +12,23 @@ export class ProduitService {
 
 
   public fetchAll(denom: string = '', cat: string = '') {
-    return this.httpClient.get(this.BASE_URL + "/Produits/paginate")
+    let search = '';
+    if (denom != '') {
+      search = `?denom=${denom}`
+    }
+
+    if (cat != '') {
+      if (search != '') {
+        search = search + `&cat=${cat}`
+        console.log("search", search);
+
+      } else {
+        search = `?cat=${cat}`
+      }
+    }
+    console.log("denom", denom, 'cat', cat);
+
+    return this.httpClient.get(this.BASE_URL + "/Produits/paginate" + search)
   }
 
 

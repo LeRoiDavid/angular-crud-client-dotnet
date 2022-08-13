@@ -27,7 +27,6 @@ export class CreateProduitComponent implements OnInit {
     this.produitForm = new FormGroup({
       denominationProduit: new FormControl("", [Validators.required, Validators.minLength(2)]),
       categorieProduit: new FormControl("", [Validators.required, Validators.minLength(2)]),
-
       quantiteProduit: new FormControl("", [Validators.required, Validators.minLength(2)]),
       puProduit: new FormControl("", [Validators.required, Validators.minLength(2)]),
 
@@ -36,12 +35,7 @@ export class CreateProduitComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("Contact : ", this.contact)
   }
-
-
-
-
 
   onCreate() {
     this.isSaving = true
@@ -50,16 +44,12 @@ export class CreateProduitComponent implements OnInit {
 
     this.produitSub = this.produitService.create(this.contact).subscribe({
       next: success => {
-
-
         this.router.navigateByUrl("/");
         this.isSaving = false
       },
       error: rs => {
         this.isSaving = false
-
         alert("Echec de la creation")
-
       }
     }
     )
