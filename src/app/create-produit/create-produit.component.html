@@ -1,0 +1,97 @@
+<h2 class="mt-5">Crée un produit</h2>
+
+<div class="col-12 p-4">
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-12 p-5">
+          <h5>Crée un contact</h5>
+          <form [formGroup]="produitForm" (ngSubmit)="onCreate()">
+            <div class="form-group">
+              <label for="denominationProduit">Dénomination</label>
+              <input
+                id="denominationProduit"
+                type="text"
+                class="form-control input-rounded"
+                placeholder="denominationProduit"
+                formControlName="denominationProduit"
+                [ngClass]="{
+                  'is-invalid': formsErrors.get('denominationProduit')
+                }"
+              />
+            </div>
+            <br />
+
+            <div class="form-group">
+              <label for="categorieProduit">Catégorie</label>
+              <input
+                id="categorieProduit"
+                type="text"
+                class="form-control input-rounded"
+                placeholder="categorieProduit"
+                formControlName="categorieProduit"
+                [ngClass]="{
+                  'is-invalid': formsErrors.get('lastName')
+                }"
+              />
+            </div>
+
+            <br />
+
+            <div class="form-group">
+              <label for="quantiteProduit">Quantité</label>
+              <input
+                id="quantiteProduit"
+                type="number"
+                class="form-control input-rounded"
+                placeholder="quantiteProduit"
+                formControlName="quantiteProduit"
+                [ngClass]="{
+                  'is-invalid': formsErrors.get('quantiteProduit')
+                }"
+              />
+            </div>
+            <br />
+
+            <div class="form-group">
+              <label for="puProduit">puProduit</label>
+              <input
+                id="puProduit"
+                type="number"
+                class="form-control input-rounded"
+                placeholder="puProduit"
+                formControlName="puProduit"
+                [ngClass]="{
+                  'is-invalid': formsErrors.get('puProduit')
+                }"
+              />
+            </div>
+            <br />
+
+            <button
+              class="btn login-form__btn submit btn-sm"
+              style="background-color: #ffd21a"
+              type="submit"
+              [disabled]="produitForm.invalid || isSaving"
+            >
+              <span
+                class="spinner-border spinner-border-sm"
+                role="status"
+                *ngIf="isSaving"
+                aria-hidden="true"
+              ></span>
+              Enregistrer
+            </button>
+
+            <a
+              class="btn login-form__btn submit btn-sm btn-primary"
+              routerLink="/"
+            >
+              Retour vers la liste</a
+            >
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,106 @@
+<h2 class="mt-5">Liste des produits</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">IdProduit</th>
+      <th scope="col">Denomination</th>
+      <th scope="col">Categorie</th>
+      <th scope="col">Quantite</th>
+      <th scope="col">PU</th>
+      <th scope="col">Supprimer</th>
+      <th scope="col">Datail</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngIf="produits && produits.length > 0">
+      <tr *ngFor="let produit of produits">
+        <th scope="row">{{ produit.idProduit }}</th>
+        <td>{{ produit.denominationProduit }}</td>
+        <td>{{ produit.categorieProduit }}</td>
+        <td>{{ produit.quantiteProduit }}</td>
+        <td>{{ produit.puProduit }}</td>
+
+        <td>
+          <button class="btn btn-danger" (click)="delete(produit)">
+            Supprimer
+          </button>
+        </td>
+        <td>
+          <button
+            type="button"
+            (click)="onDisplay(produit)"
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#edit"
+          >
+            Détail
+          </button>
+        </td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>
+
+<a
+  class="btn login-form__btn submit btn-sm"
+  style="background-color: #ffd21a"
+  routerLink="/create"
+  >Ajouter</a
+>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  id="edit"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Détail contact</h5>
+        <button type="button" class="close" data-dismiss="modal">
+          <span>&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" *ngIf="produitToShow && produitToShow != null">
+        <p>
+          <span
+            >Prénom:
+            <span class="span-detail">
+              {{ produitToShow?.denominationProduit }}</span
+            >
+          </span>
+        </p>
+        <p>
+          <span
+            >Nom:
+            <span class="span-detail">
+              {{ produitToShow.categorieProduit }}</span
+            >
+          </span>
+        </p>
+        <p>
+          <span
+            >Email:
+            <span class="span-detail">{{ produitToShow.quantiteProduit }}</span>
+          </span>
+        </p>
+        <p>
+          <span
+            >Téléphone :
+            <span class="span-detail">{{ produitToShow.puProduit }} Fr</span>
+          </span>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Fermer
+        </button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>
